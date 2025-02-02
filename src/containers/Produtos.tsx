@@ -1,22 +1,25 @@
-import { Game } from '../App'
+import { useEffect } from 'react'
 import Produto from '../components/Produto'
-
+import { useGetJogosQuery } from '../services/api'
 import * as S from './styles'
 
-type Props = {
-  jogos: Game[]
-  adicionarAoCarrinho: (jogo: Game) => void
-}
+const Produtos = () => {
+  const { data: jogos, isLoading, error } = useGetJogosQuery()
 
-const Produtos = ({ jogos, adicionarAoCarrinho }: Props) => {
+  useEffect(() => {
+    console.log('isLoading:', isLoading)
+    console.log('jogos:', jogos)
+    console.log('error:', error)
+  }, [isLoading, jogos, error])
+
+  if (isLoading) return <h2>Carregando...</h2>
+
   return (
-    <>
-      <S.Produtos>
-        {jogos.map((game) => (
-          <Produto key={game.id} game={game} aoComprar={adicionarAoCarrinho} />
-        ))}
-      </S.Produtos>
-    </>
+    <S.Produtos>
+      {jogos?.map((game) => (
+        <Produto key={game.id} game={game} />
+      ))}
+    </S.Produtos>
   )
 }
 
