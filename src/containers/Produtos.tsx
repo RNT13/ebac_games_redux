@@ -4,7 +4,7 @@ import { useGetJogosQuery } from '../services/api'
 import * as S from './styles'
 
 const Produtos = () => {
-  const { data: jogos, isLoading, error } = useGetJogosQuery()
+  const { data: jogos = [], isLoading, error } = useGetJogosQuery()
 
   useEffect(() => {
     console.log('isLoading:', isLoading)
@@ -16,9 +16,11 @@ const Produtos = () => {
 
   return (
     <S.Produtos>
-      {jogos?.map((game) => (
-        <Produto key={game.id} game={game} />
-      ))}
+      {(jogos ?? []).length > 0 ? (
+        (jogos ?? []).map((game) => <Produto key={game.id} game={game} />)
+      ) : (
+        <h2>Nenhum jogo disponível</h2>
+      )}
     </S.Produtos>
   )
 }

@@ -30,7 +30,7 @@ const Produto = ({ game }: Props) => {
         ))}
       </S.Plataformas>
       <S.Prices>
-        {game.precoAntigo && <small>{paraReal(game.precoAntigo)}</small>}
+        {game.precoAntigo ? <small>{paraReal(game.precoAntigo)}</small> : null}
         <strong>{paraReal(game.preco)}</strong>
       </S.Prices>
       <S.BtnComprar onClick={() => dispatch(adicionar(game))} type="button">

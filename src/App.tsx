@@ -1,7 +1,7 @@
 import Header from './components/Header'
 
 import { Provider } from 'react-redux'
-import { Produtos } from './containers/styles'
+import Produtos from './containers/Produtos'
 import { store } from './store'
 import { GlobalStyle } from './styles'
 
